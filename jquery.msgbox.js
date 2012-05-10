@@ -2,11 +2,7 @@
  * jQuery MsgBox 0.2.6
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
-<<<<<<< HEAD
- * This project licensed under a MIT License.
-=======
  * MIT License
->>>>>>> 0dd45c24d1a46f3ad1aa11e425241d353a1024ab
  **************************************************************************************/
 ;(function($){
 	var nofix=$.browser.msie&&~~$.browser.version<8,
