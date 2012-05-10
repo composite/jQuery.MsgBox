@@ -1,6 +1,8 @@
 jQuery MsgBox
 =============
 
+0.2.6 BETA
+
 What is it?
 -----------
 
