@@ -57,6 +57,11 @@ $.prompt("what's your name?",function(string){
 });
 ```
 
+I want view live example.
+-------------------------
+
+OK. [here an example](http://jsfiddle.net/preFy/ "live example"). 
+
 What browser can run with this plugin?
 --------------------------------------
 first, jQuery 1.4 or later needed.
