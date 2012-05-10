@@ -1,34 +1,34 @@
-/**************************************************************************************
+ï»¿/**************************************************************************************
  * jQuery MsgBox 0.2.6
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
- * This project licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+ * This project licensed under a MIT License.
  **************************************************************************************/
 ;(function($){
 	var nofix=$.browser.msie&&~~$.browser.version<8,
 		fixed=nofix?'absolute':'fixed';
 	$.msgbox=function(msg,options){
-		//¿É¼Ç °¡°ø
+		//ì˜µì…˜ ê°€ê³µ
 		options=$.extend({},$.msgbox.options,options);
-		//º¯¼ö ¹× ¿ä¼Ò Á¤ÀÇ
+		//ë³€ìˆ˜ ë° ìš”ì†Œ ì •ì˜
 		var io={},mb='msgbox-',cok=mb+'-ok',cno=mb+'-no',pw='password',styles=options.css||{},t=!0,f=!1,p=('input' in options),q=!!options.confirm,
-			$C=$("<div></div>").addClass(mb+'ui').css(styles.ui||{}),//°æ°íÃ¢
-			$M=$("<div>&shy;</div>").addClass(mb+'modal').css(styles.modal||{}),//°æ°íÃ¢ ¹è°æ
-			$T=$("<pre></pre>").addClass(mb+'msg').css(styles.msg||{}).html(msg).appendTo($C),//°æ°í ³»¿ë
+			$C=$("<div></div>").addClass(mb+'ui').css(styles.ui||{}),//ê²½ê³ ì°½
+			$M=$("<div>&shy;</div>").addClass(mb+'modal').css(styles.modal||{}),//ê²½ê³ ì°½ ë°°ê²½
+			$T=$("<pre></pre>").addClass(mb+'msg').css(styles.msg||{}).html(msg).appendTo($C),//ê²½ê³  ë‚´ìš©
 			$I=p?$("<div><input type='"+(options[pw]?pw:'text')+"'/></div>").addClass(mb+'inbox').css(styles.indiv||{})
-				.children().addClass(mb+'input').css(styles.input||{}).end().appendTo($C):null,//ÀÔ·Â ¸ğµå½Ã ÀÔ·ÂÃ¢
-			$B=$("<div></div>").addClass(mb+'buttons').css(styles.buttons||{}).appendTo($C),//°æ°í ¹öÆ° ³ª¿­
-			$BT=$("<button></button>").addClass(mb+'button').css(styles.button||{}),//¹öÆ° ¿øÇü
+				.children().addClass(mb+'input').css(styles.input||{}).end().appendTo($C):null,//ì…ë ¥ ëª¨ë“œì‹œ ì…ë ¥ì°½
+			$B=$("<div></div>").addClass(mb+'buttons').css(styles.buttons||{}).appendTo($C),//ê²½ê³  ë²„íŠ¼ ë‚˜ì—´
+			$BT=$("<button></button>").addClass(mb+'button').css(styles.button||{}),//ë²„íŠ¼ ì›í˜•
 			$BS=[
 				$BT.clone(t).addClass(cok).text(q?options.yes:options.ok).appendTo($B)
 				,p||q?$BT.clone(t).addClass(cno).text(options.no).appendTo($B):null
-			];//°æ°í ¹öÆ°µé
-		//ÀÔ·Â ¸ğµå½Ã Á¶Ä¡»çÇ×
+			];//ê²½ê³  ë²„íŠ¼ë“¤
+		//ì…ë ¥ ëª¨ë“œì‹œ ì¡°ì¹˜ì‚¬í•­
 		if(p){
-			options.confirm=t;//È®ÀÎ ¸ğµå ¸ÂÀ½.
+			options.confirm=t;//í™•ì¸ ëª¨ë“œ ë§ìŒ.
 			if(typeof(options.input)=='string') $I.children().val(options.input);
 		}
-		//°æ°íÃ¢ ºñÈ°¼ºÈ­ Àü
+		//ê²½ê³ ì°½ ë¹„í™œì„±í™” ì „
 		io.before=function(e){
 			var code=window.event?window.event.keyCode:e.which;
 			switch(code){
@@ -36,11 +36,11 @@
 				case 0:case 27:$C.find('button.'+(p||q?cno:cok)).trigger('click');return f;
 			}
 		};
-		//body¿¡ »ğÀÔ ÈÄ ·¹ÀÌ¾Æ¿ô Àâ±â
+		//bodyì— ì‚½ì… í›„ ë ˆì´ì•„ì›ƒ ì¡ê¸°
 		var kp='keypress',kt='.'+mb+'ui,.'+mb+'modal',$D=$(document.documentElement?document.documentElement:document.body)
 			.append($M).append($C).bind(kp,io.before);
 		//$C.add($M).keypress(io.before);
-		//°æ°íÃ¢ ºñÈ°¼ºÈ­ ÈÄ
+		//ê²½ê³ ì°½ ë¹„í™œì„±í™” í›„
 		io.after=function(b,v){
 			for(var i=0,cn=b.className.split(' ');i<cn.length;i++)
 				switch(cn[i]){
@@ -61,18 +61,18 @@
 				}
 			$D.unbind(kp,io.before);
 		};
-		//°øÅë °æ°í Å¬¸¯ ½Ã Á¶Ä¡
+		//ê³µí†µ ê²½ê³  í´ë¦­ ì‹œ ì¡°ì¹˜
 		$C.delegate('button','click',function(e){
 			$C.add($M).remove();
 			io.after(this,p?$I.children().val():null);
 		}).delegate('input','keypress',io.before);
-		//·¹ÀÌ¾Æ¿ô ÀÚµ¿Á¤·Ä
+		//ë ˆì´ì•„ì›ƒ ìë™ì •ë ¬
 		if(styles.ui)
 			$C.css({
 				'margin-left':~~(-$C.outerWidth()*0.5)+'px',
 				'margin-top':~~(-$C.outerHeight()*0.75)+'px'
 			});
-		//°æ°íÃ¢ Æ÷Ä¿½º
+		//ê²½ê³ ì°½ í¬ì»¤ìŠ¤
 		if(p) $C.find('input:text').select(); else $C.find('button:eq(0)').focus();
 		return $C;
 	};
