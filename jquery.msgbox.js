@@ -2,12 +2,17 @@
  * jQuery MsgBox 0.2.6
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
+<<<<<<< HEAD
  * This project licensed under a MIT License.
+=======
+ * MIT License
+>>>>>>> 0dd45c24d1a46f3ad1aa11e425241d353a1024ab
  **************************************************************************************/
 ;(function($){
 	var nofix=$.browser.msie&&~~$.browser.version<8,
 		fixed=nofix?'absolute':'fixed';
 	$.msgbox=function(msg,options){
+<<<<<<< HEAD
 		//옵션 가공
 		options=$.extend({},$.msgbox.options,options);
 		//변수 및 요소 정의
@@ -29,6 +34,29 @@
 			if(typeof(options.input)=='string') $I.children().val(options.input);
 		}
 		//경고창 비활성화 전
+=======
+		//�ɼ� ����
+		options=$.extend({},$.msgbox.options,options);
+		//���� �� ��� ���
+		var io={},mb='msgbox-',cok=mb+'-ok',cno=mb+'-no',pw='password',styles=options.css||{},t=!0,f=!1,p=('input' in options),q=!!options.confirm,
+			$C=$("<div></div>").addClass(mb+'ui').css(styles.ui||{}),//���â
+			$M=$("<div>&shy;</div>").addClass(mb+'modal').css(styles.modal||{}),//���â ���
+			$T=$("<pre></pre>").addClass(mb+'msg').css(styles.msg||{}).html(msg).appendTo($C),//��� ����
+			$I=p?$("<div><input type='"+(options[pw]?pw:'text')+"'/></div>").addClass(mb+'inbox').css(styles.indiv||{})
+				.children().addClass(mb+'input').css(styles.input||{}).end().appendTo($C):null,//�Է� ���� �Է�â
+			$B=$("<div></div>").addClass(mb+'buttons').css(styles.buttons||{}).appendTo($C),//��� ��ư ����
+			$BT=$("<button></button>").addClass(mb+'button').css(styles.button||{}),//��ư ����
+			$BS=[
+				$BT.clone(t).addClass(cok).text(q?options.yes:options.ok).appendTo($B)
+				,p||q?$BT.clone(t).addClass(cno).text(options.no).appendTo($B):null
+			];//��� ��ư��
+		//�Է� ���� �ġ����
+		if(p){
+			options.confirm=t;//Ȯ�� ��� ���.
+			if(typeof(options.input)=='string') $I.children().val(options.input);
+		}
+		//���â ��Ȱ��ȭ ��
+>>>>>>> 0dd45c24d1a46f3ad1aa11e425241d353a1024ab
 		io.before=function(e){
 			var code=window.event?window.event.keyCode:e.which;
 			switch(code){
@@ -36,11 +64,19 @@
 				case 0:case 27:$C.find('button.'+(p||q?cno:cok)).trigger('click');return f;
 			}
 		};
+<<<<<<< HEAD
 		//body에 삽입 후 레이아웃 잡기
 		var kp='keypress',kt='.'+mb+'ui,.'+mb+'modal',$D=$(document.documentElement?document.documentElement:document.body)
 			.append($M).append($C).bind(kp,io.before);
 		//$C.add($M).keypress(io.before);
 		//경고창 비활성화 후
+=======
+		//body�� ���� �� ���̾ƿ� ���
+		var kp='keypress',kt='.'+mb+'ui,.'+mb+'modal',$D=$(document.documentElement?document.documentElement:document.body)
+			.append($M).append($C).bind(kp,io.before);
+		//$C.add($M).keypress(io.before);
+		//���â ��Ȱ��ȭ ��
+>>>>>>> 0dd45c24d1a46f3ad1aa11e425241d353a1024ab
 		io.after=function(b,v){
 			for(var i=0,cn=b.className.split(' ');i<cn.length;i++)
 				switch(cn[i]){
@@ -61,18 +97,30 @@
 				}
 			$D.unbind(kp,io.before);
 		};
+<<<<<<< HEAD
 		//공통 경고 클릭 시 조치
+=======
+		//���� ��� Ŭ�� �� �ġ
+>>>>>>> 0dd45c24d1a46f3ad1aa11e425241d353a1024ab
 		$C.delegate('button','click',function(e){
 			$C.add($M).remove();
 			io.after(this,p?$I.children().val():null);
 		}).delegate('input','keypress',io.before);
+<<<<<<< HEAD
 		//레이아웃 자동정렬
+=======
+		//���̾ƿ� �ڵ����
+>>>>>>> 0dd45c24d1a46f3ad1aa11e425241d353a1024ab
 		if(styles.ui)
 			$C.css({
 				'margin-left':~~(-$C.outerWidth()*0.5)+'px',
 				'margin-top':~~(-$C.outerHeight()*0.75)+'px'
 			});
+<<<<<<< HEAD
 		//경고창 포커스
+=======
+		//���â ��Ŀ��
+>>>>>>> 0dd45c24d1a46f3ad1aa11e425241d353a1024ab
 		if(p) $C.find('input:text').select(); else $C.find('button:eq(0)').focus();
 		return $C;
 	};

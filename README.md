@@ -1,6 +1,8 @@
 jQuery MsgBox
 =============
 
+0.2.6 BETA
+
 What is it?
 -----------
 
@@ -55,6 +57,11 @@ $.prompt("what's your name?",function(string){
 });
 ```
 
+I want view live example.
+-------------------------
+
+OK. [here an example](http://jsfiddle.net/preFy/ "live example"). 
+
 What browser can run with this plugin?
 --------------------------------------
 first, jQuery 1.4 or later needed.
@@ -74,7 +81,7 @@ License
 
 (The MIT License)
 
-Copyright (c) 2011-2012 ukjin yang <ukjinplant@msn.com>
+Copyright (c) 2011-2012 Ukjin 'composite' Yang <ukjinplant@msn.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
