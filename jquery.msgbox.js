@@ -1,5 +1,5 @@
 ﻿/**************************************************************************************
- * jQuery MsgBox 0.2.6
+ * jQuery MsgBox 0.3.6
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
  * This project licensed under a MIT License.
@@ -13,28 +13,67 @@
         //변수 및 요소 정의
         var io = {},
             mb = 'msgbox-',
-            cok = mb + '-ok',
-            cno = mb + '-no',
+            cok = mb + 'ok',
+            cno = mb + 'no',
             pw = 'password',
             styles = options.css || {},
             t = !0,
             f = !1,
             p = ('input' in options),
             q = !! options.confirm,
+			iae = function(e) { //포커스된 요소가 메시지박스 아니면 메시지박스로 강제 포커스 이동
+				setTimeout(function(){
+					var act=$(document.activeElement),ms=['.'+mb+'input','.'+mb+'button'];
+					if(act.length&&(act.is(ms[0])||act.is(ms[1]))){console.log('good.');}
+					else $C.find(ms+'').eq(0).focus();
+				},0);
+			},
             $C = $("<div></div>").addClass(mb + 'ui').css(styles.ui || {}),
             //경고창
             $M = $("<div>&shy;</div>").addClass(mb + 'modal').css(styles.modal || {}),
             //경고창 배경
             $T = $("<pre></pre>").addClass(mb + 'msg').css(styles.msg || {}).html(msg).appendTo($C),
             //경고 내용
-            $I = p ? $("<div><input type='" + (options[pw] ? pw : 'text') + "'/></div>").addClass(mb + 'inbox').css(styles.indiv || {}).children().addClass(mb + 'input').css(styles.input || {}).end().appendTo($C) : null,
+            $I = p ?
+				$("<div><input type='" + (options[pw] ? pw : 'text') + "'/></div>").addClass(mb + 'inbox').css(styles.indiv || {}).children()
+					.addClass(mb + 'input').css(styles.input || {}).bind('keydown',function(e){//탭의 역순 시 마지막 버튼 포커스
+						if((window.event ? window.event.keyCode : e.which)==9&&e.shiftKey){
+							e.preventDefault();
+							$C.find('.'+mb+'button').filter(':last').focus();
+						}
+					}).bind('blur',iae).end().appendTo($C)
+				: null,
             //입력 모드시 입력창
             $B = $("<div></div>").addClass(mb + 'buttons').css(styles.buttons || {}).appendTo($C),
             //경고 버튼 나열
-            $BT = $("<button></button>").addClass(mb + 'button').css(styles.button || {}),
+            $BT = $("<button></button>").addClass(mb + 'button').css(styles.button || {}).bind('keydown',function(e){
+				if(this!=document.activeElement) return;
+				e.stopPropagation();
+				var code = window.event ? window.event.keyCode : e.which,that=$(this),target,shift=e.shiftKey;
+				switch (code) {
+					case 9://탭키 누르면 다음 버튼 및 입력창 포커스
+					case 39://오른쪽키 누르면 다음 버튼으로만 포커스
+						e.preventDefault();
+						if(target=that[code==9&&shift?'prev':'next']('button'),target.length) target.focus();
+						else if(code==9){
+							if(target=$C.find('.'+mb+'input'),target.length) target.select();
+							else if(target=that[shift?'next':'prev']('button'),target.length) target.focus();
+						}
+						break;
+					case 37://왼쪽키는 이전 버튼으로만 포커스
+						e.preventDefault();
+						if(target=that.prev('button'),target.length) target.focus();
+						break;
+					case 27://ESC는 무조건 취소처리
+						e.preventDefault();
+						$C.find('button.' + (p || q ? cno : cok)).trigger('click');
+						break;
+				}
+			}).bind('blur',iae),
             //버튼 원형
             $BS = [
             $BT.clone(t).addClass(cok).text(q ? options.yes : options.ok).appendTo($B), p || q ? $BT.clone(t).addClass(cno).text(options.no).appendTo($B) : null]; //경고 버튼들
+		$C.add($M).bind('keydown',function(){});
         //입력 모드시 조치사항
         if (p) {
             options.confirm = t; //확인 모드 맞음.
@@ -44,20 +83,15 @@
         io.before = function (e) {
             var code = window.event ? window.event.keyCode : e.which;
             switch (code) {
-            case 13:
-                $C.find('button.' + cok).trigger('click');
-                return f;
-            case 0:
-            case 27:
-                $C.find('button.' + (p || q ? cno : cok)).trigger('click');
-                return f;
-            }
+				case 27:
+					$C.find('button.' + (p || q ? cno : cok)).trigger('click');
+					return f;
+				}
         };
         //body에 삽입 후 레이아웃 잡기
         var kp = 'keypress',
             kt = '.' + mb + 'ui,.' + mb + 'modal',
             $D = $(document.documentElement ? document.documentElement : document.body).append($M).append($C).bind(kp, io.before);
-        //$C.add($M).keypress(io.before);
         //경고창 비활성화 후
         io.after = function (b, v) {
             for (var i = 0, cn = b.className.split(' '); i < cn.length; i++)
@@ -93,7 +127,7 @@
         //레이아웃 자동정렬
         if (styles.ui) $C.css({
             'margin-left': ~~ (-$C.outerWidth() * 0.5) + 'px',
-            'margin-top': ~~ (-$C.outerHeight() * 0.75) + 'px'
+            'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px'
         });
         //경고창 포커스
         if (p) $C.find('input:text').select();
@@ -113,7 +147,7 @@
                 'background-color': 'white',
                 'position': fixed,
                 'left': '50%',
-                'top': '50%',
+                'top': '32%',
                 'overflow': 'hidden'
             },
             modal: {
@@ -123,7 +157,7 @@
                 'right': '0',
                 'bottom': '0',
                 'background-color': 'black',
-                'opacity': '.5'
+                'opacity': '.4'
             },
             msg: {
                 'padding': '2em 4em',
@@ -146,7 +180,7 @@
                 'border': '1px inset #3D7BAD'
             },
             input: {
-                'width': '100%',
+                'width': '99%',
                 'display': 'block',
                 'border': '0'
             }
