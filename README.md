@@ -35,6 +35,30 @@ because, this plugin cannot wait user action while showing dialog.
 If you want get user's action, put a callback function in next of message param.
 when user clicked in a dialog button, such as OK or cancel, msgbox will call your defined function.
 
+Please don't..
+```js
+form.submit=function(){
+    //All MsgBox function returns MsgBox Container Object. so it'll return always true.
+    if($.confirm('Are you sure to save it?')){
+        return true;//Page will changed without your confirm.
+    }
+    return false;
+}
+```
+**So, what can I do?**
+```js
+form.submit=function(){
+    if(!form.confirm){//Use variables or DOM objects or whatever you want.
+        $.confirm('Are you sure to save it?',function(answer){
+            form.confirm=answer;
+            if(answer) form.submit();//submit again to verify confirm value.
+        });
+        return false;//You should use this line to prevent page changes.
+    }else return true;
+}
+```
+* You can use another solution to solve this.
+
 OK. so, How to use with callback function?
 ------------------------------------------
 
@@ -74,6 +98,13 @@ Wow! It's simple and cool! can I join with you for make better this plugin?
 ---------------------------------------------------------------------------
 
 Sure. contributes are welcome! just fork this plugin and get involved to make a better place for you and for me.
+
+Goals
+-----
+
+ - More Simplify and Optimization.
+ - Less Size and Unresolved Issues.
+ - **Deferred Object Intergration**
 
 
 License
