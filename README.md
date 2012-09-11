@@ -104,7 +104,7 @@ Goals
 
  - More Simplify and Optimization.
  - Less Size and Unresolved Issues.
- - **Deferred Object Intergration**
+ - **All Methods will returns Deferred Object instead of DOM Container**
 
 
 License
