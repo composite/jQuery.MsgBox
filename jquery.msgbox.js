@@ -1,5 +1,5 @@
 ﻿/**************************************************************************************
- * jQuery MsgBox 0.3.6
+ * jQuery MsgBox 0.3.7
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
  * This project licensed under a MIT License.
@@ -81,12 +81,21 @@
         }
         //경고창 비활성화 전
         io.before = function (e) {
+			e.stopPropagation();
             var code = window.event ? window.event.keyCode : e.which;
+			//전역 메시지박스에도 before가 붙으므로 격리.
+			if(e.target.type=='text'&&!code){
+				$C.find('button.' + (p || q ? cno : cok)).trigger('click');
+				return f;
+			}
             switch (code) {
+				case 13:
+					$C.find('button.' + cok).trigger('click');
+					return f;
 				case 27:
 					$C.find('button.' + (p || q ? cno : cok)).trigger('click');
 					return f;
-				}
+			}
         };
         //body에 삽입 후 레이아웃 잡기
         var kp = 'keypress',
@@ -123,7 +132,7 @@
         $C.delegate('button', 'click', function (e) {
             $C.add($M).remove();
             io.after(this, p ? $I.children().val() : null);
-        }).delegate('input', 'keypress', io.before);
+        });
         //레이아웃 자동정렬
         if (styles.ui) $C.css({
             'margin-left': ~~ (-$C.outerWidth() * 0.5) + 'px',
