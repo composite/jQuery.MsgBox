@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Jquery.msgbox : Firefox style simplist dialog form." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Jquery.msgbox</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/composite/jQuery.MsgBox">View on GitHub</a>
+
+          <h1 id="project_title">Jquery.msgbox</h1>
+          <h2 id="project_tagline">Firefox style simplist dialog form.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/composite/jQuery.MsgBox/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/composite/jQuery.MsgBox/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>jQuery MsgBox</h1>
+
+<p>0.3.7 BETA</p>
+
+<h2>What is it?</h2>
+
+<p>Firefox style simplist dialog form.</p>
+
+<h2>How to use this?</h2>
+
+<p>It's quiet simple.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.lastest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.msgbox.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>alert("i'm alert");
+-&gt; $.alert("i'm alert");</p>
+
+<p>confirm("Are you sure?");
+-&gt; $.confirm("Are you sure?");</p>
+
+<p>prompt("please text me.");
+-&gt; $.prompt("please text me.");</p>
+
+<h2>Wait! YOU MUST SEE BEFORE USE THIS PLUGIN,</h2>
+
+<p>this plugin is can't replace as javascript standard function (alert, etc.)
+because, this plugin cannot wait user action while showing dialog.
+If you want get user's action, put a callback function in next of message param.
+when user clicked in a dialog button, such as OK or cancel, msgbox will call your defined function.</p>
+
+<p>Please don't..</p>
+
+<div class="highlight"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="c1">//All MsgBox function returns MsgBox Container Object. so it'll return always true.</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">'Are you sure to save it?'</span><span class="p">)){</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span><span class="c1">//Page will changed without your confirm.</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><strong>So, what can I do?</strong></p>
+
+<div class="highlight"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">form</span><span class="p">.</span><span class="nx">confirm</span><span class="p">){</span><span class="c1">//Use variables or DOM objects or whatever you want.</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">'Are you sure to save it?'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">){</span>
+            <span class="nx">form</span><span class="p">.</span><span class="nx">confirm</span><span class="o">=</span><span class="nx">answer</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">answer</span><span class="p">)</span> <span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span><span class="c1">//submit again to verify confirm value.</span>
+        <span class="p">});</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span><span class="c1">//You should use this line to prevent page changes.</span>
+    <span class="p">}</span><span class="k">else</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li>You can use another solution to solve this.</li>
+</ul><h2>OK. so, How to use with callback function?</h2>
+
+<p>jQuery.MsgBox can add your callback function for provide next action after user clicked.
+It's Very simple.</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s2">"click me."</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'you clicked'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s2">"press OK or Cancel."</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">bool</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'you clicked'</span><span class="o">+</span><span class="p">(</span><span class="nx">bool</span><span class="o">?</span><span class="s1">'OK'</span><span class="o">:</span><span class="s1">'cancel'</span><span class="p">));</span>
+<span class="p">});</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">prompt</span><span class="p">(</span><span class="s2">"what's your name?"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'your name is '</span><span class="o">+</span><span class="nx">string</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>I want view live example.</h2>
+
+<p>OK. <a href="http://jsfiddle.net/preFy/" title="live example">here's an example</a>. </p>
+
+<h2>What browser can run with this plugin?</h2>
+
+<p>first, jQuery 1.4 or later needed.
+and, You can run with most popular major browser,
+Internet Explorer 8 or above, Firefox 3 or above, Safari 4 or above, Chrome 10 or above, Opera 9 or above.
+NOTE : Old school browser, such as IE 7 or lower is have a problem with CSS issue.
+that's all. this plugin have NO images or other resources.</p>
+
+<h2>Wow! It's simple and cool! can I join with you for make better this plugin?</h2>
+
+<p>Sure. contributes are welcome! just fork this plugin and get involved to make a better place for you and for me.</p>
+
+<h2>Goals</h2>
+
+<ul>
+<li>More Simplify and Optimization.</li>
+<li>Less Size and Unresolved Issues.</li>
+<li><strong>All Methods will returns Deferred Object instead of DOM Container</strong></li>
+</ul><h2>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2011-2012 Ukjin 'composite' Yang <a href="mailto:ukjinplant@msn.com">ukjinplant@msn.com</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Jquery.msgbox maintained by <a href="https://github.com/composite">composite</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
