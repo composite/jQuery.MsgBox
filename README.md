@@ -97,7 +97,7 @@ that's all. this plugin have NO images or other resources.
 I want use as own style, is it possible?
 ----------------------------------------
 
-Yes. check out readme.txt for detailed usage.
+Yes. check out [Wiki](https://github.com/composite/jQuery.MsgBox/wiki) for detailed usage.
 
 Wow! It's simple and cool! can I join with you for make better this plugin?
 ---------------------------------------------------------------------------
