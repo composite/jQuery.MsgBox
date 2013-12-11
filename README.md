@@ -1,7 +1,7 @@
 jQuery MsgBox
 =============
 
-0.3.7 BETA
+0.5.0 BETA
 
 What is it?
 -----------
@@ -67,12 +67,12 @@ It's Very simple.
 
 ```js
 $.alert("click me.",function(){
-    $.alert('you clicked');
+    $.alert('you are clicked!');
 });
 ```
 ```js
 $.confirm("press OK or Cancel.",function(bool){
-    $.alert('you clicked'+(bool?'OK':'cancel'));
+    $.alert('you are clicked '+(bool?'OK':'cancel'));
 });
 ```
 ```js
@@ -84,7 +84,7 @@ $.prompt("what's your name?",function(string){
 I want view live example.
 -------------------------
 
-OK. [here's an example](http://jsfiddle.net/preFy/ "live example"). 
+Sure. [here's an example](http://jsfiddle.net/preFy/ "live example"). 
 
 What browser can run with this plugin?
 --------------------------------------
@@ -99,12 +99,24 @@ Wow! It's simple and cool! can I join with you for make better this plugin?
 
 Sure. contributes are welcome! just fork this plugin and get involved to make a better place for you and for me.
 
+Hey, I'm using IE version under 9, Msgbox flicking when showing MsgBox. What's happening? 
+------------------------------------------------------------------------------------------
+
+Sorry. that is prevent changing width dynamically after center align on IE. I don't know it is bug, but I'll figure out it.
+
 Goals
 -----
 
  - More Simplify and Optimization.
  - Less Size and Unresolved Issues.
- - **All Methods will returns Deferred Object instead of DOM Container**
+ - **All Methods will returns Deferred Object instead of DOM Container** ??? Well, I'll think about it.
+
+What's new?
+-----
+
+ - Use &lt;div&gt; with white-space: pre; instead of &lt;pre&gt; for more better view of MsgBox with CSS Framework such as Bootstrap.
+ - Remove Browser compatibility for position:fixed is buggy under IE 7, so this will support jQuery over 1.8! I'll never test freaking old browsers.
+ - Remove jQuery in my repository, Use any available jQuery CDN in demo instead.
 
 
 License

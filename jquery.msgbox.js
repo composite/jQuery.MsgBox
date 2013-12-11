@@ -5,8 +5,7 @@
  * This project licensed under a MIT License.
  **************************************************************************************/;
 (function ($) {
-    var nofix = $.browser.msie && ~~$.browser.version < 8,
-        fixed = nofix ? 'absolute' : 'fixed';
+    var fixed = 'fixed';
     $.msgbox = function (msg, options) {
         //옵션 가공
         options = $.extend({}, $.msgbox.options, options);
@@ -32,7 +31,7 @@
             //경고창
             $M = $("<div>&shy;</div>").addClass(mb + 'modal').css(styles.modal || {}),
             //경고창 배경
-            $T = $("<pre></pre>").addClass(mb + 'msg').css(styles.msg || {}).html(msg).appendTo($C),
+            $T = $("<div></div>").addClass(mb + 'msg').css(styles.msg || {}).html(msg).appendTo($C),
             //경고 내용
             $I = p ?
 				$("<div><input type='" + (options[pw] ? pw : 'text') + "'/></div>").addClass(mb + 'inbox').css(styles.indiv || {}).children()
@@ -134,10 +133,12 @@
             io.after(this, p ? $I.children().val() : null);
         });
         //레이아웃 자동정렬
-        if (styles.ui) $C.css({
-            'margin-left': ~~ (-$C.outerWidth() * 0.5) + 'px',
-            'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px'
-        });
+        setTimeout(function(){ //setTimeout 으로 pre 속성으로 인한 IE 중앙정렬 문제 수정
+            if (styles.ui) $C.css({
+                'margin-left': ~~ (-$C.outerWidth() * 0.5) + 'px',
+                'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px'
+            });
+        },0);
         //경고창 포커스
         if (p) $C.find('input:text').select();
         else $C.find('button:eq(0)').focus();
@@ -171,7 +172,9 @@
             msg: {
                 'padding': '2em 4em',
                 'overflow': 'hidden',
-                'font-family': 'verdana,gulim,sans-serif' //,'max-width':(screen.availWidth*0.9)+'px'
+                'font-family': 'verdana,gulim,sans-serif',
+                //'max-width':(screen.availWidth*0.9)+'px',
+                'white-space': 'pre'
             },
             buttons: {
                 'padding': '1em',

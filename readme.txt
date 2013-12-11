@@ -1,4 +1,4 @@
-jQuery MsgBox 0.2.6 Beta
+jQuery MsgBox 0.5.0 Beta
 
 MIT License
 
@@ -52,9 +52,10 @@ $.msgbox(message,options) : A prototype of jQuery msgbox function.
 
 Tested Browser :
 Internet Explorer 8 or above, Firefox 3 or above, Chrome 9 or above, Safari 3 or above.
-	NOT Supported Browser : Internet Explorer 7 or lower due to CSS issue. but you can define alternative css to prevent not support browser issue.
-jQuery 1.4 or above. (delegate method used.)
+	NOT Supported Browser : Internet Explorer 7 or lower due to CSS issue. I'll never see these browsers.
+jQuery 1.4 or above. (delegate method used, remove Browser compatibility for support jQuery over 1.8)
 
 Known Issues : 
 
 jQuery MsgBox is NOT awaiting user confirmation while script running. you should give callback function to provide next process.
+in IE under 8, will flick Msgbox when showing. It's a known issue but I can't figure out it. but I'll fix it.
