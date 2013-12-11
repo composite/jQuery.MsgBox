@@ -38,17 +38,24 @@ $.msgbox(message,options) : A prototype of jQuery msgbox function.
 	options : A options.
 		submit : callback function. default is null.
 		confirm : the msgbox will user confirm box, true. otherwise, false. default is false.
-		input : the msgbox will prompt, give true or value string. otherwise you shouldn't define this option.
-		css : a jQuery style css json value. default is firefox style defined css.
+		input : the msgbox will prompt, give true or value string for default input value. If you want not this, you shouldn't define this option.
+		css : a jQuery style css json value. default is firefox style defined css. If you want not default styles, set to null or {}.
 			ui : msgbox container style
 			modal : modal background style
 			msg : message area style
 			buttons : common button style
 			indiv : text input container style
 			input : test input style
-		ok : a string defined alert ok button. default is 'OK'.
-		yes : a string defined confirm or prompt ok button. default is 'OK'.
-		no : a string defined confirm or prompt cancel button. default is 'Cancel'.
+		ok : a string defined alert ok button. default is $.msgbox.strings.ok
+		yes : a string defined confirm or prompt ok button. $.msgbox.strings.yes
+		no : a string defined confirm or prompt cancel button. $.msgbox.strings.no
+
+$.msgbox.strings : static member, A default msgbox strings. you can change this globally.
+	.ok : a string defined alert ok button. default is 'OK'.
+	.yes : a string defined confirm or prompt ok button. default is 'OK'.
+	.no : a string defined confirm or prompt cancel button. default is 'Cancel'.
+
+$.msgbox.css : static member, A default msgbox style. If you want manual setting a msgbox style, set to null or {}. same as css property of $.msgbox function. 
 
 Tested Browser :
 Internet Explorer 8 or above, Firefox 3 or above, Chrome 9 or above, Safari 3 or above.

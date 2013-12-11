@@ -94,6 +94,11 @@ Internet Explorer 8 or above, Firefox 3 or above, Safari 4 or above, Chrome 10 o
 NOTE : Old school browser, such as IE 7 or lower is have a problem with CSS issue.
 that's all. this plugin have NO images or other resources.
 
+I want use as own style, is it possible?
+----------------------------------------
+
+Yes. check out readme.txt for detailed usage.
+
 Wow! It's simple and cool! can I join with you for make better this plugin?
 ---------------------------------------------------------------------------
 
