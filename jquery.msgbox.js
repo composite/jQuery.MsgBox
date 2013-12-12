@@ -1,11 +1,18 @@
 ﻿/**************************************************************************************
- * jQuery MsgBox 0.5.0
+ * jQuery MsgBox 0.6.0
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
  * This project licensed under a MIT License.
  **************************************************************************************/;
 (function ($) {
-    var fixed = 'fixed';
+    if(!window.console){
+        window.console = {};
+        window.console.log = $.noop;
+    }
+    var fixed = 'fixed', kp = 'keypress', rs = 'resize'
+        ,isCssDef = function(css){
+            return !css || css == 'auto';
+        };
     $.msgbox = function (msg, options) {
         //옵션 가공
         options = $.extend({}, $.msgbox.options, options);
@@ -27,14 +34,15 @@
 					else $C.find(ms+'').eq(0).focus();
 				},0);
 			},
-            $C = $("<div></div>").addClass(mb + 'ui').css(styles.ui || {}),
+            $W = $(window),
+            $C = $("<div></div>").addClass(mb + 'ui').addClass(mb + (p ? 'prompt' : (q ? 'confirm' : 'alert'))).css(styles.ui || {}),
             //경고창
             $M = $("<div>&shy;</div>").addClass(mb + 'modal').css(styles.modal || {}),
             //경고창 배경
             $T = $("<div></div>").addClass(mb + 'msg').css(styles.msg || {}).html(msg).appendTo($C),
             //경고 내용
             $I = p ?
-				$("<div><input type='" + (options[pw] ? pw : 'text') + "'/></div>").addClass(mb + 'inbox').css(styles.indiv || {}).children()
+				$("<div><input type='" + (options[pw] ? pw : 'text') + "'/></div>").addClass(mb + 'inbox').css(styles.inbox || {}).children()
 					.addClass(mb + 'input').css(styles.input || {}).bind('keydown',function(e){//탭의 역순 시 마지막 버튼 포커스
 						if((window.event ? window.event.keyCode : e.which)==9&&e.shiftKey){
 							e.preventDefault();
@@ -78,6 +86,39 @@
             options.confirm = t; //확인 모드 맞음.
             if (typeof (options.input) == 'string') $I.children().val(options.input);
         }
+        //윈도우 리사이징에 대한 메시지박스 반응
+        $W.bind(rs,io[rs] = function() {
+            if(!io.firstWidth){
+                io.firstUnder = true;
+                io.firstWidth = $C.outerWidth();
+                console.log(io.firstWidth);
+            }
+            var isOver = $W.width() - 20 <= io.firstWidth;
+            if (styles.ui){
+                if(isOver && !io.isOver){
+                    console.log('OVER');
+                    io.isOver = true;
+                    $C.css({
+                        'width': 'auto',
+                        'left': '10px',
+                        'right': '10px',
+                        'margin-left': '0',
+                        'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px'
+                    }); 
+                }else if((!isOver && io.isOver) || io.firstUnder){
+                    console.log('UNDER');
+                    io.firstUnder = false;
+                    io.isOver = false;
+                    $C.css({
+                        'width': io.firstWidth + 'px',
+                        'left': styles.ui.left || 'auto',
+                        'right': styles.ui.right || 'auto',
+                        'margin-left': ~~ (-io.firstWidth * 0.5) + 'px',
+                        'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px'
+                    }); 
+                }
+           }
+        });
         //경고창 비활성화 전
         io.before = function (e) {
 			e.stopPropagation();
@@ -97,35 +138,35 @@
 			}
         };
         //body에 삽입 후 레이아웃 잡기
-        var kp = 'keypress',
-            kt = '.' + mb + 'ui,.' + mb + 'modal',
+        var kt = '.' + mb + 'ui,.' + mb + 'modal',
             $D = $(document.documentElement ? document.documentElement : document.body).append($M).append($C).bind(kp, io.before);
         //경고창 비활성화 후
         io.after = function (b, v) {
             for (var i = 0, cn = b.className.split(' '); i < cn.length; i++)
             switch (cn[i]) {
-            case cok:
-                switch (t) {
-                case p:
-                    options.submit.call($C[0], v);
+                case cok:
+                    switch (t) {
+                    case p:
+                        options.submit.call($C[0], v);
+                        break;
+                    case q:
+                        options.submit.call($C[0], !! t);
+                        break;
+                    default:
+                        options.submit.call($C[0]);
+                        break;
+                    }
                     break;
-                case q:
-                    options.submit.call($C[0], !! t);
+                case cno:
+                    if (p || !(p && q)) {
+                        options.submit.call($C[0]);
+                    } else {
+                        options.submit.call($C[0], f);
+                    }
                     break;
-                default:
-                    options.submit.call($C[0]);
-                    break;
-                }
-                break;
-            case cno:
-                if (p || !(p && q)) {
-                    options.submit.call($C[0]);
-                } else {
-                    options.submit.call($C[0], f);
-                }
-                break;
             }
             $D.unbind(kp, io.before);
+            $W.unbind(rs, io[rs]);
         };
         //공통 경고 클릭 시 조치
         $C.delegate('button', 'click', function (e) {
@@ -134,10 +175,7 @@
         });
         //레이아웃 자동정렬
         setTimeout(function(){ //setTimeout 으로 pre 속성으로 인한 IE 중앙정렬 문제 수정
-            if (styles.ui) $C.css({
-                'margin-left': ~~ (-$C.outerWidth() * 0.5) + 'px',
-                'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px'
-            });
+            $W.trigger(rs);
         },0);
         //경고창 포커스
         if (p) $C.find('input:text').select();
@@ -174,7 +212,8 @@
                 'overflow': 'hidden',
                 'font-family': 'verdana,gulim,sans-serif',
                 //'max-width':(screen.availWidth*0.9)+'px',
-                'white-space': 'pre'
+                'white-space': 'pre-wrap',
+                'word-wrap': 'break-word'
             },
             buttons: {
                 'padding': '1em',
@@ -186,7 +225,7 @@
                 'width': '72px',
                 'margin': 'auto .25em'
             },
-            indiv: {
+            inbox: {
                 'width': '90%',
                 'margin': '-2em auto 2em',
                 'border': '1px inset #3D7BAD'
