@@ -1,5 +1,5 @@
 ﻿/**************************************************************************************
- * jQuery MsgBox 0.6.0
+ * jQuery MsgBox 0.6.1
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
  * This project licensed under a MIT License.
@@ -55,12 +55,13 @@
             //경고 버튼 나열
             $BT = $("<button></button>").addClass(mb + 'button').css(styles.button || {}).bind('keydown',function(e){
 				if(this!=document.activeElement) return;
-				e.stopPropagation();
+				
+                e.stopPropagation();
 				var code = window.event ? window.event.keyCode : e.which,that=$(this),target,shift=e.shiftKey;
 				switch (code) {
 					case 9://탭키 누르면 다음 버튼 및 입력창 포커스
 					case 39://오른쪽키 누르면 다음 버튼으로만 포커스
-						e.preventDefault();
+                        e.preventDefault();
 						if(target=that[code==9&&shift?'prev':'next']('button'),target.length) target.focus();
 						else if(code==9){
 							if(target=$C.find('.'+mb+'input'),target.length) target.select();
@@ -68,11 +69,11 @@
 						}
 						break;
 					case 37://왼쪽키는 이전 버튼으로만 포커스
-						e.preventDefault();
+                        e.preventDefault();
 						if(target=that.prev('button'),target.length) target.focus();
 						break;
 					case 27://ESC는 무조건 취소처리
-						e.preventDefault();
+                        e.preventDefault();
 						$C.find('button.' + (p || q ? cno : cok)).trigger('click');
 						break;
 				}
@@ -130,7 +131,7 @@
 			}
             switch (code) {
 				case 13:
-					$C.find('button.' + cok).trigger('click');
+					$C.find('button:focus').trigger('click');
 					return f;
 				case 27:
 					$C.find('button.' + (p || q ? cno : cok)).trigger('click');

@@ -110,16 +110,19 @@ Sorry. that is prevent changing width dynamically after center align on IE. I do
 
 ## What's new?
 
-### 0.5.0
+### 0.6.1
 
- - Use &lt;div&gt; with white-space: pre; instead of &lt;pre&gt; for more better view of MsgBox with CSS Framework such as Bootstrap.
- - Remove Browser compatibility for position:fixed is buggy under IE 7, so this will support jQuery over 1.8! I'll never test freaking old browsers.
- - Remove jQuery in my repository, Use any available jQuery CDN in demo instead.
+ - Fixed forced true callback after press ENTER key. focused button will fired event if you press ENTER key.
 
 ### 0.6.0
 
  - Auto resizing added. Msgbox will show full size when window size less than alert size, If not, revert to original size.
 
+### 0.5.0
+
+ - Use &lt;div&gt; with white-space: pre; instead of &lt;pre&gt; for more better view of MsgBox with CSS Framework such as Bootstrap.
+ - Remove Browser compatibility for position:fixed is buggy under IE 7, so this will support jQuery over 1.8! I'll never test freaking old browsers.
+ - Remove jQuery in my repository, Use any available jQuery CDN in demo instead.
 
 ## License
 
