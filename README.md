@@ -118,7 +118,7 @@ Sorry. that is prevent changing width dynamically after center align on IE. I do
 
 ### 0.6.0
 
- - Auto resizing added. Msgbox will show full size when window size less than alert size, If not, revert original size.
+ - Auto resizing added. Msgbox will show full size when window size less than alert size, If not, revert to original size.
 
 
 ## License
