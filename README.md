@@ -1,16 +1,13 @@
-jQuery MsgBox
-=============
+# jQuery MsgBox
 
 0.6.0 BETA
 
-What is it?
------------
+## What is it?
 
 Firefox style simplist dialog form.
 
 
-How to use this?
-----------------
+## How to use this?
 
 It's quiet simple.
 
@@ -19,17 +16,16 @@ It's quiet simple.
 <script src="jquery.msgbox.min.js"></script>
 ```
 
-alert("i'm alert");
--> $.alert("i'm alert");
+    alert("i'm alert");
+    -> $.alert("i'm alert");
 
-confirm("Are you sure?");
--> $.confirm("Are you sure?");
+    confirm("Are you sure?");
+    -> $.confirm("Are you sure?");
 
-prompt("please text me.");
--> $.prompt("please text me.");
+    prompt("please text me.");
+    -> $.prompt("please text me.");
 
-Wait! YOU MUST SEE BEFORE USE THIS PLUGIN,
-------------------------------------------
+## Wait! YOU MUST SEE BEFORE USE THIS PLUGIN,
 this plugin is can't replace as javascript standard function (alert, etc.)
 because, this plugin cannot wait user action while showing dialog.
 If you want get user's action, put a callback function in next of message param.
@@ -46,6 +42,7 @@ form.submit=function(){
 }
 ```
 **So, what can I do?**
+
 ```js
 form.submit=function(){
     if(!form.confirm){//Use variables or DOM objects or whatever you want.
@@ -59,8 +56,7 @@ form.submit=function(){
 ```
 * You can use another solution to solve this.
 
-OK. so, How to use with callback function?
-------------------------------------------
+## OK. so, How to use with callback function?
 
 jQuery.MsgBox can add your callback function for provide next action after user clicked.
 It's Very simple.
@@ -81,59 +77,51 @@ $.prompt("what's your name?",function(string){
 });
 ```
 
-I want view live example.
--------------------------
+## I want view live example.
 
 Sure. [here's an example](http://jsfiddle.net/preFy/ "live example"). 
 
-What browser can run with this plugin?
---------------------------------------
+## What browser can run with this plugin?
+
 first, jQuery 1.4 or later needed.
 and, You can run with most popular major browser,
 Internet Explorer 8 or above, Firefox 3 or above, Safari 4 or above, Chrome 10 or above, Opera 9 or above.
 NOTE : Old school browser, such as IE 7 or lower is have a problem with CSS issue.
 that's all. this plugin have NO images or other resources.
 
-I want use as own style, is it possible?
-----------------------------------------
+## I want use as own style, is it possible?
 
 Yes. check out [Wiki](https://github.com/composite/jQuery.MsgBox/wiki) for detailed usage.
 
-Wow! It's simple and cool! can I join with you for make better this plugin?
----------------------------------------------------------------------------
+## Wow! It's simple and cool! can I join with you for make better this plugin?
 
 Sure. contributes are welcome! just fork this plugin and get involved to make a better place for you and for me.
 
-Hey, I'm using IE version under 9, Msgbox flicking when showing MsgBox. What's happening? 
-------------------------------------------------------------------------------------------
+## Hey, I'm using IE version under 9, Msgbox flicking when showing MsgBox. What's happening?
 
 Sorry. that is prevent changing width dynamically after center align on IE. I don't know it is bug, but I'll figure out it.
 
-Goals
------
+## Goals
 
  - More Simplify and Optimization.
  - Less Size and Unresolved Issues.
  - **Use CSS instead of inline style!!!**
  - **All Methods will returns Deferred Object instead of DOM Container** ??? Well, I'll think about it.
 
-What's new?
------
+## What's new?
 
-0.5.0
-=====
+### 0.5.0
 
  - Use &lt;div&gt; with white-space: pre; instead of &lt;pre&gt; for more better view of MsgBox with CSS Framework such as Bootstrap.
  - Remove Browser compatibility for position:fixed is buggy under IE 7, so this will support jQuery over 1.8! I'll never test freaking old browsers.
  - Remove jQuery in my repository, Use any available jQuery CDN in demo instead.
 
-0.6.0
-=====
+### 0.6.0
+
  - Auto resizing added. Msgbox will show full size when window size less than alert size, If not, revert original size.
 
 
-License
--------
+## License
 
 (The MIT License)
 
