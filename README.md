@@ -1,7 +1,7 @@
 jQuery MsgBox
 =============
 
-0.5.0 BETA
+0.6.0 BETA
 
 What is it?
 -----------
@@ -114,14 +114,22 @@ Goals
 
  - More Simplify and Optimization.
  - Less Size and Unresolved Issues.
+ - **Use CSS instead of inline style!!!**
  - **All Methods will returns Deferred Object instead of DOM Container** ??? Well, I'll think about it.
 
 What's new?
 -----
 
+0.5.0
+=====
+
  - Use &lt;div&gt; with white-space: pre; instead of &lt;pre&gt; for more better view of MsgBox with CSS Framework such as Bootstrap.
  - Remove Browser compatibility for position:fixed is buggy under IE 7, so this will support jQuery over 1.8! I'll never test freaking old browsers.
  - Remove jQuery in my repository, Use any available jQuery CDN in demo instead.
+
+0.6.0
+=====
+ - Auto resizing added. Msgbox will show full size when window size less than alert size, If not, revert original size.
 
 
 License
