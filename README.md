@@ -1,6 +1,6 @@
 # jQuery MsgBox
 
-0.6.1 BETA
+0.7.4 BETA
 
 ## What is it?
 
@@ -105,10 +105,37 @@ Sorry. that is prevent changing width dynamically after center align on IE. I do
 
  - More Simplify and Optimization.
  - Less Size and Unresolved Issues.
- - **Use CSS instead of inline style!!!**
  - **All Methods will returns Deferred Object instead of DOM Container** ??? Well, I'll think about it.
 
 ## What's new?
+
+### 0.7.4
+
+ - Container add for prompt bug fixed.
+ - fixed prompt UI.
+
+### 0.7.3 (internal)
+
+ - onresize event callback changed; this keyword will point to msgbox container. plain DOM, not jQuery.
+
+### 0.7.2 (internal)
+
+ - remove static property **customStyle**. just add style ```<link class="msgbox-style"/>``` or ```<style class="msgbox-style"/>``` instead.
+ - Fixed minor UI bugs.
+
+### 0.7.1 (Internal)
+
+ - Fixed some bug.
+ - console.log() for test is will not fired in production mode.
+
+### 0.7.0 (Internal)
+
+ - Replaced inline style to inline CSS for more performance.
+ - Removed css property in $.msgbox() use $.msgbox.css or own standard CSS instead.
+ - input property of $.msgbox changed. You can set any human-view type (string, number, etc). if not want prompt, just set false or undefined or null.
+ - Fixed ENTER or ESC press event bug in input box
+ - new property: onresize; available on $.msgbox() or $.msgbox.onresize static property. You can prepare when window size changes. see wiki for details.
+ - new static property: customStyle; You want set own style instead of default style, just add your code : ```$.msgbox.customStyle = true;```
 
 ### 0.6.1
 
