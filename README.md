@@ -1,6 +1,6 @@
 # jQuery MsgBox
 
-0.7.4 BETA
+0.7.5 BETA
 
 ## What is it?
 
@@ -125,6 +125,10 @@ Sorry. that is prevent changing width dynamically after center align on IE. I do
  - **All Methods will returns Deferred Object instead of DOM Container** ??? Well, I'll think about it.
 
 ## What's new?
+
+### 0.7.5
+
+ - console.log() for test will not fired in production mode.
 
 ### 0.7.4
 

@@ -1,5 +1,5 @@
 ﻿/**************************************************************************************
- * jQuery MsgBox 0.7.4
+ * jQuery MsgBox 0.7.5
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
  * This project licensed under a MIT License.
@@ -290,7 +290,7 @@
             if(!io.firstWidth){
                 io.firstUnder = true;
                 io.firstWidth = $C.outerWidth();
-                console.log(io.firstWidth);
+                //console.log(io.firstWidth);
             }
             var isOver = $(window).width() - 20 <= io.firstWidth;
             if(isOver && !io.isOver){
