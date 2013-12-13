@@ -3,6 +3,8 @@ jQuery MsgBox
 
 0.3.7 BETA
 
+**This version is just a LEGACY SUPPORT FOR OLD USERS. NO UPDATES, NO BUG FIXES, NO ANY PLAN in this version. If you new to msgbox, please go to [lastest](https://github.com/composite/jQuery.MsgBox) version.**
+
 What is it?
 -----------
 
