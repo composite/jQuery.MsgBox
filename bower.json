@@ -1,0 +1,29 @@
+{
+  "name": "msgbox",
+  "version": "0.3.7",
+  "description": "The Message box for web, Firefox style, User notification made simple.",
+  "keywords": [
+    "alert",
+    "confirm",
+    "prompt",
+    "msgbox",
+    "dialog",
+    "notification",
+    "ui",
+    "simple"
+  ],
+  "authors": [
+    "Composite"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/composite/jQuery.MsgBox/tree/lagacy",
+  "main": [
+    "jquery.msgbox.min.js"
+  ],
+  "ignore": [
+    "*.json"
+  ],
+  "dependencies": {
+    "jquery": "1.4.0 - 1.7.2"
+  }
+}

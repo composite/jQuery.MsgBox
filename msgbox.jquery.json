@@ -1,0 +1,31 @@
+{
+    "name": "msgbox",
+    "title": "jQuery MsgBox",
+    "description": "The Message box for web, Firefox style, User notification made simple.",
+    "keywords": ["alert","confirm","prompt","msgbox","dialog","notification","ui","simple"],
+    "version": "0.3.7",
+    "author": {
+        "name": "Composite",
+        "url": "http://hazard.kr/"
+    },
+    "maintainers": [
+        {
+            "name": "Ukjin Yang",
+            "email": "ukjinplant@msn.com",
+            "url": "http://hazard.kr/"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "bugs": "https://github.com/composite/jQuery.MsgBox/issues",
+    "homepage": "https://github.com/composite/jQuery.MsgBox/tree/lagacy",
+    "docs": "https://github.com/composite/jQuery.MsgBox/blob/lagacy/readme.txt",
+    "download": "https://raw.github.com/composite/jQuery.MsgBox/lagacy/jquery.msgbox.min.js",
+    "dependencies": {
+        "jquery": "1.4.0 - 1.7.2"
+    }
+}
