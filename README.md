@@ -1,6 +1,6 @@
 # jQuery MsgBox
 
-0.8.0 BETA
+0.8.1 BETA
 
 ## What is it?
 
@@ -11,7 +11,7 @@ Firefox style simplist dialog form.
 
 before install, you must have [jQuery](http://jquery.com/download/) >= 1.5.0, I strongly recommand you have a lastest version.
 
-That's very simple. just download below,
+That's very simple. just download below lastest version,
 
  - [Minified (for production)](https://raw.github.com/composite/jQuery.MsgBox/master/jquery.msgbox.min.js)
  - [Unminified (for development)](https://raw.github.com/composite/jQuery.MsgBox/master/jquery.msgbox.js)
@@ -125,6 +125,11 @@ Sorry. that is prevent changing width dynamically after center align on IE. I do
  - **All Methods will returns Deferred Object instead of DOM Container** ??? Well, I'll think about it.
 
 ## What's new?
+
+### 0.8.1
+
+ - Some code optimization.
+ - Use UglifyJS for minification, instead of YUI compressor.
 
 ### 0.8.0
 

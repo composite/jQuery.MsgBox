@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>MsgBox 데모</title>
+	</head>
+	<body>
+		<button onclick="alert('테스트 경고창입니다.')">일반 경고창</button>
+		<button onclick="$.alert('테스트 경고창입니다.')">경고창</button>
+		<button onclick="$.alert('테스트 경고창입니다. 세상에서 가장 긴 그림은 긴 기린 보고 그린 길다란 기린 그림 \n 대우로얄뉴로얄~',function(){$.alert('참 길죠잉?');})">긴 경고창</button>
+		<button onclick="$.confirm('테스트 하시겠습니까?',function(b){$.alert((b?'확인':'취소')+' 하셨습니다.');})">질문창</button>
+		<button onclick="$.prompt('이름을 입력하세요.',function(s){$.alert('이름은 : '+s);})">입력창</button>
+		<button onclick="$.prompt('이름을 입력하세요.  세상에서 가장 긴 그림은 긴 기린 보고 그린 길다란 기린 그림 ','test',function(s){$.alert('이름은 : '+s);})">긴 입력창</button>
+		<button onclick="alert(prompt('이름을 입력하세요.  세상에서 가장 긴 그림은 긴 기린 보고 그린 길다란 기린 그림 ','test'))">일반 입력창</button>
+		<script>document.write('<script src="'+(~location.protocol.indexOf('http')?'':'http:')+'//code.jquery.com/jquery-1.10.2.min.js"><\/script>');</script>
+		<script src="jquery.msgbox.min.js"></script>
+		<script>
+			for(var i=0;i<100;i++){
+				document.write('<br/>');
+			}
+		</script>
+	</body>
+</html>

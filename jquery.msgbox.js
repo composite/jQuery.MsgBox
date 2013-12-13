@@ -1,5 +1,5 @@
 ﻿/**************************************************************************************
- * jQuery MsgBox 0.8.0
+ * jQuery MsgBox 0.8.1
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
  * This project licensed under a MIT License.
@@ -9,7 +9,7 @@
         window.console = {};
         window.console.log = $.noop;
     }
-    var fixed = 'fixed', div = 'div', kp = 'keypress', rs = 'resize', legacy = 'v' == '\v' //IE 8 대응.
+    var fixed = 'fixed', div = 'div', kp = 'keypress', rs = 'resize', mb = 'msgbox-', dmb = '.' + mb, cst = mb + '-style', btn = 'button', clk = 'click', legacy = 'v' == '\v' //IE 8 대응.
         ,isCssDef = function(css){
             return !css || css == 'auto';
         },$$ = function(tag){return $(document.createElement(tag));};
@@ -18,13 +18,13 @@
     var styleGen = function(style, repl){
         if(styleGen.once && !repl) return;
         style = style || {};
-        var css = styleGen.style ? styleGen.style : (styleGen.style = $$('style').addClass('msgbox-style').attr('type','text/css')), builder = [];
+        var css = styleGen.style ? styleGen.style : (styleGen.style = $$('style').addClass(cst).attr('type','text/css')), builder = [];
 
         for(var part in style){
             if(!style[part]){continue;}
             var cs = style[part];
 
-            builder.push('.msgbox-' + part);
+            builder.push(dmb + part);
             builder.push('{');
 
             for(var name in cs){
@@ -58,11 +58,10 @@
         options = $.extend({}, $.msgbox.options, options);
 
         //스타일 생성
-        if(!$('.msgbox-style').length){styleGen($.msgbox.css);}
+        if(!$(cst).length){styleGen($.msgbox.css);}
 
         //변수 및 요소 정의
         var io = {},
-            mb = 'msgbox-',
             cok = mb + 'ok',
             cno = mb + 'no',
             pw = 'password',
@@ -73,7 +72,7 @@
             q = !!options.confirm,
 			iae = function(e) { //포커스된 요소가 메시지박스 아니면 메시지박스로 강제 포커스 이동
 				setTimeout(function(){
-					var act=$(document.activeElement),ms=['.'+mb+'input','.'+mb+'button'];
+					var act=$(document.activeElement),ms=[dmb+'input',dmb+btn];
 					if(act.length&&(act.is(ms[0])||act.is(ms[1]))){
                         //console.log('good.');
                     }
@@ -82,7 +81,7 @@
 			},
             $W = $(window),
             //경고창
-            $C = $$('div').addClass(mb + 'container').append($$(div).addClass(mb + 'ui').addClass(mb + (p ? 'prompt' : (q ? 'confirm' : 'alert')))).children(),
+            $C = $$(div).addClass(mb + 'container').append($$(div).addClass(mb + 'ui').addClass(mb + (p ? 'prompt' : (q ? 'confirm' : 'alert')))).children(),
             //경고창 배경
             $M = $$(div).addClass(mb + 'modal'),
             //경고 내용
@@ -94,16 +93,16 @@
                         var code = e.which;
 						if(code == 9 && e.shiftKey){
 							e.preventDefault();
-							$C.find('.'+mb+'button').filter(':last').focus();
+							$C.find(dmb+btn).filter(':last').focus();
 						}else{
                             switch(code){
                                 case 13://엔터는 확인
                                     e.preventDefault();
-                                    $C.find('button.' + cok).trigger('click');
+                                    $C.find(btn + '.' + cok).trigger(clk);
                                     return false;
                                 case 27://ESC는 취소
                                     e.preventDefault();
-                                    $C.find('button.' + (p || q ? cno : cok)).trigger('click');
+                                    $C.find(btn + '.' + (p || q ? cno : cok)).trigger(clk);
                                     break;
                             }
                         }
@@ -112,7 +111,7 @@
             //경고 버튼 나열
             $B = $$(div).addClass(mb + 'buttons').appendTo($C),
             //기본 버튼
-            $BT = $$("button").addClass(mb + 'button').bind('keydown',function(e){
+            $BT = $$(btn).addClass(mb + btn).bind('keydown',function(e){
 				if(this!=document.activeElement) return;
 				
                 e.stopPropagation();
@@ -121,19 +120,19 @@
 					case 9://탭키 누르면 다음 버튼 및 입력창 포커스
 					case 39://오른쪽키 누르면 다음 버튼으로만 포커스
                         e.preventDefault();
-						if(target=that[code==9&&shift?'prev':'next']('button'),target.length) target.focus();
+						if(target=that[code==9&&shift?'prev':'next'](btn),target.length) target.focus();
 						else if(code==9){
-							if(target=$C.find('.'+mb+'input'),target.length) target.select();
-							else if(target=that[shift?'next':'prev']('button'),target.length) target.focus();
+							if(target=$C.find(dmb+'input'),target.length) target.select();
+							else if(target=that[shift?'next':'prev'](btn),target.length) target.focus();
 						}
 						break;
 					case 37://왼쪽키는 이전 버튼으로만 포커스
                         e.preventDefault();
-						if(target=that.prev('button'),target.length) target.focus();
+						if(target=that.prev(btn),target.length) target.focus();
 						break;
 					case 27://ESC는 무조건 취소처리
                         e.preventDefault();
-						$C.find('button.' + (p || q ? cno : cok)).trigger('click');
+						$C.find(btn + '.' + (p || q ? cno : cok)).trigger(clk);
 						break;
 				}
 			}).bind('blur',iae),
@@ -169,20 +168,20 @@
             var code = window.event ? window.event.keyCode : e.which;
 			//전역 메시지박스에도 before가 붙으므로 격리.
 			if(e.target.type=='text'&&!code){
-				$C.find('button.' + (p || q ? cno : cok)).trigger('click');
+				$C.find(btn + '.' + (p || q ? cno : cok)).trigger(clk);
 				return f;
 			}
             switch (code) {
 				case 13:
-					$C.find('button:focus').trigger('click');
+					$C.find(btn + ':focus').trigger('click');
 					return f;
 				case 27:
-					$C.find('button.' + (p || q ? cno : cok)).trigger('click');
+					$C.find(btn + '.' + (p || q ? cno : cok)).trigger(clk);
 					return f;
 			}
         };
         //body에 삽입 후 레이아웃 잡기
-        var kt = '.' + mb + 'ui,.' + mb + 'modal',
+        var kt = dmb + 'ui,' + dmb + 'modal',
             $D = $(document.documentElement || document.body).append($M).append($C.parent()).bind(kp, io.before);
         //경고창 비활성화 후
         io.after = function (b, v) {
@@ -202,7 +201,7 @@
             $W.unbind(rs, io[rs]);
         };
         //공통 경고 클릭 시 조치
-        $C.delegate('button', 'click', function (e) {
+        $C.delegate(btn, clk, function (e) {
             var cleanup = function(){
                 $C.parent().add($M).remove();
             },onclose = options.onclose || $.msgbox.onclose;
@@ -218,7 +217,7 @@
             $W.trigger(rs);
             //경고창 포커스
             if (p) $C.find('input:text').select();
-            else $C.find('button:eq(0)').focus();
+            else $C.find(btn + ':eq(0)').focus();
             //onopen 이벤트 발생
             var onopen = options.onopen || $.msgbox.onopen;
             if($.isFunction(onopen)) onopen.call($C[0], options);

@@ -1,6 +1,6 @@
 {
         "name": "msgbox",
-        "version": "0.8.0",
+        "version": "0.8.1",
         "description": "The Message box for web, Firefox style, User notification made simple.",
         "keywords": ["alert","confirm","prompt","msgbox","dialog","notification","ui","simple"],
         "authors": ["Composite"],
