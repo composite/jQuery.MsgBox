@@ -9,6 +9,8 @@ Firefox style simplist dialog form.
 
 ## How to install?
 
+before install, you must have [jQuery](http://jquery.com/download/) >= 1.4.0, I strongly recommand you have a lastest version.
+
 That's very simple. just download below,
 
  - [Minified (for production)](https://raw.github.com/composite/jQuery.MsgBox/master/jquery.msgbox.min.js)
