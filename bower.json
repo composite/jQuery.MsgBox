@@ -1,6 +1,6 @@
 {
         "name": "msgbox",
-        "version": "0.7.5",
+        "version": "0.8.0",
         "description": "The Message box for web, Firefox style, User notification made simple.",
         "keywords": ["alert","confirm","prompt","msgbox","dialog","notification","ui","simple"],
         "authors": ["Composite"],
@@ -8,6 +8,6 @@
         "homepage": "https://github.com/composite/jQuery.MsgBox",
         "main": ["jquery.msgbox.min.js"],
         "ignore": ["*.json"],
-        "dependencies": {"jquery": ">= 1.4.0"},
+        "dependencies": {"jquery": ">= 1.5.0"},
         "devDependencies": {}
 }

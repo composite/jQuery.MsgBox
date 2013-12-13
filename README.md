@@ -1,6 +1,6 @@
 # jQuery MsgBox
 
-0.7.5 BETA
+0.8.0 BETA
 
 ## What is it?
 
@@ -9,7 +9,7 @@ Firefox style simplist dialog form.
 
 ## How to install?
 
-before install, you must have [jQuery](http://jquery.com/download/) >= 1.4.0, I strongly recommand you have a lastest version.
+before install, you must have [jQuery](http://jquery.com/download/) >= 1.5.0, I strongly recommand you have a lastest version.
 
 That's very simple. just download below,
 
@@ -100,7 +100,7 @@ Sure. [here's an example](http://jsfiddle.net/preFy/ "live example").
 
 ## What browser can run with this plugin?
 
-first, jQuery 1.4 or later needed.
+first, jQuery 1.5 or later needed.
 and, You can run with most popular major browser,
 Internet Explorer 8 or above, Firefox 3 or above, Safari 4 or above, Chrome 10 or above, Opera 9 or above.
 NOTE : Old school browser, such as IE 7 or lower is have a problem with CSS issue.
@@ -125,6 +125,13 @@ Sorry. that is prevent changing width dynamically after center align on IE. I do
  - **All Methods will returns Deferred Object instead of DOM Container** ??? Well, I'll think about it.
 
 ## What's new?
+
+### 0.8.0
+
+ - Major UI changes: more compatibility to view, Wrapped more a div to centering layer using only CSS (but still vertical centering using JS).
+ - NEW property: onopen event property and $.msgbox.onopen static property; Fires after msgbox opened.
+ - NEW property: onclose event property and $.msgbox.onclose static property; Fires before msgbox closing.
+ - 2 new property for your own CSS or JS animation effect. onclose event also support jQuery Deferred Object. See [Wiki](https://github.com/composite/jQuery.MsgBox/wiki) for details.
 
 ### 0.7.5
 

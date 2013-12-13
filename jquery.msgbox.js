@@ -1,5 +1,5 @@
 ﻿/**************************************************************************************
- * jQuery MsgBox 0.7.5
+ * jQuery MsgBox 0.8.0
  * by composite (ukjinplant@msn.com)
  * http://blog.hazard.kr
  * This project licensed under a MIT License.
@@ -82,7 +82,7 @@
 			},
             $W = $(window),
             //경고창
-            $C = $$(div).addClass(mb + 'ui').addClass(mb + (p ? 'prompt' : (q ? 'confirm' : 'alert'))),
+            $C = $$('div').addClass(mb + 'container').append($$(div).addClass(mb + 'ui').addClass(mb + (p ? 'prompt' : (q ? 'confirm' : 'alert')))).children(),
             //경고창 배경
             $M = $$(div).addClass(mb + 'modal'),
             //경고 내용
@@ -141,7 +141,7 @@
             $BS = [
             $BT.clone(t).addClass(cok).text(q ? options.yes : options.ok).appendTo($B), p || q ? $BT.clone(t).addClass(cno).text(options.no).appendTo($B) : null]; //경고 버튼들
 		$C.add($M).bind('keydown',function(){});
-        $.extend($C[0], {modal: $M[0], msg: $T[0], inbox: $I ? $I[0] : null, buttons: $B[0]});
+        $.extend($C[0], {container: $C.parent()[0],modal: $M[0], msg: $T[0], inbox: $I ? $I[0] : null, buttons: $B[0]});
         //입력 모드시 조치사항
         if (p) {
             options.confirm = t; //확인 모드 맞음.
@@ -183,30 +183,19 @@
         };
         //body에 삽입 후 레이아웃 잡기
         var kt = '.' + mb + 'ui,.' + mb + 'modal',
-            $D = $(document.documentElement || document.body).append($M).append($C).bind(kp, io.before);
+            $D = $(document.documentElement || document.body).append($M).append($C.parent()).bind(kp, io.before);
         //경고창 비활성화 후
         io.after = function (b, v) {
-            for (var i = 0, cn = b.className.split(' '); i < cn.length; i++)
-            switch (cn[i]) {
-                case cok:
-                    switch (t) {
-                    case p:
-                        options.submit.call($C[0], v);
-                        break;
-                    case q:
-                        options.submit.call($C[0], !! t);
-                        break;
-                    default:
-                        options.submit.call($C[0]);
-                        break;
-                    }
+            var isok = $(b).hasClass(cok);
+            switch (t) {
+                case p:
+                    options.submit.call($C[0], isok ? v : null);
                     break;
-                case cno:
-                    if (p || !(p && q)) {
-                        options.submit.call($C[0]);
-                    } else {
-                        options.submit.call($C[0], f);
-                    }
+                case q:
+                    options.submit.call($C[0], isok);
+                    break;
+                default:
+                    options.submit.call($C[0]);
                     break;
             }
             $D.unbind(kp, io.before);
@@ -214,8 +203,14 @@
         };
         //공통 경고 클릭 시 조치
         $C.delegate('button', 'click', function (e) {
-            $C.add($M).remove();
+            var cleanup = function(){
+                $C.parent().add($M).remove();
+            },onclose = options.onclose || $.msgbox.onclose;
+            
             io.after(this, p ? $I.children().val() : null);
+
+            if($.isFunction(onclose)) $.when(onclose.call($C[0], p ? I.children().val() : $(this).hasClass(cok))).always(cleanup);
+            else cleanup();
         });
         
         var prepare = function(){
@@ -224,6 +219,9 @@
             //경고창 포커스
             if (p) $C.find('input:text').select();
             else $C.find('button:eq(0)').focus();
+            //onopen 이벤트 발생
+            var onopen = options.onopen || $.msgbox.onopen;
+            if($.isFunction(onopen)) onopen.call($C[0], options);
         };
 
         if(legacy){setTimeout(prepare,0);}
@@ -238,14 +236,21 @@
             no: 'Cancel'
         },
         css: {
+            container: {
+                'position': fixed,
+                'left': '50%',
+                'top': '32%',
+                'z-index': '9001'
+            },
             ui: {
                 'border': '1px solid black',
                 'font': '9pt verdana,gulim,sans-serif',
                 'background-color': 'white',
-                'position': fixed,
-                'left': '50%',
+                'position': 'relative',
+                'left': '-50%',
                 'top': '32%',
-                'overflow': 'hidden'
+                'overflow': 'hidden',
+                'float': 'right'
             },
             modal: {
                 'position': fixed,
@@ -254,7 +259,8 @@
                 'right': '0',
                 'bottom': '0',
                 'background-color': 'black',
-                'opacity': '.4'
+                'opacity': '.4',
+                'z-index': '9000'
             },
             msg: {
                 'padding': '2em 4em',
@@ -286,7 +292,7 @@
             }
         },
         onresize: function(io){
-            var $C = $(this);
+            var $C = $(this), $P = $C.parent();
             if(!io.firstWidth){
                 io.firstUnder = true;
                 io.firstWidth = $C.outerWidth();
@@ -294,26 +300,26 @@
             }
             var isOver = $(window).width() - 20 <= io.firstWidth;
             if(isOver && !io.isOver){
-                //console.debug('OVER');
+                //console.log('OVER');
                 io.isOver = true;
-                $C.css({
-                    'width': 'auto',
+                $P.css({
                     'left': '10px',
                     'right': '10px',
-                    'margin-left': '0',
-                    'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px'
-                }); 
+                    'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px',
+                    'min-width': ''
+                });
+                $C.css({position:'static'});
             }else if((!isOver && io.isOver) || io.firstUnder){
                 //console.log('UNDER');
                 io.firstUnder = false;
                 io.isOver = false;
-                $C.css({
-                    'width': io.firstWidth + 'px',
+                $P.css({
                     'left': '',
                     'right': '',
-                    'margin-left': ~~ (-io.firstWidth * 0.5) + 'px',
-                    'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px'
-                }); 
+                    'margin-top': ~~ (-$C.outerHeight() * 0.32) + 'px',
+                    'min-width': io.firstWidth + 'px'
+                });
+                $C.css({position:''});
             }
         }
     });
@@ -322,6 +328,8 @@
         confirm: false,
         //input:false,
         //onresize: function(){},
+        //onopen: function(){},
+        //onclose: function(){},
         ok: $.msgbox.strings.ok,
         yes: $.msgbox.strings.yes,
         no: $.msgbox.strings.no
