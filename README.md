@@ -7,6 +7,21 @@
 Firefox style simplist dialog form.
 
 
+## How to install?
+
+That's very simple. just download below,
+
+ - [Minified (for production)](https://raw.github.com/composite/jQuery.MsgBox/master/jquery.msgbox.min.js)
+ - [Unminified (for development)](https://raw.github.com/composite/jQuery.MsgBox/master/jquery.msgbox.js)
+
+If you have bower? just type in your console.
+
+```
+bower install msgbox
+```
+
+Still not easy? OH PLZ...
+
 ## How to use this?
 
 It's quiet simple.
