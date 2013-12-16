@@ -31,19 +31,22 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>jQuery MsgBox</h1>
+        <h1>
+<a name="jquery-msgbox" class="anchor" href="#jquery-msgbox"><span class="octicon octicon-link"></span></a>jQuery MsgBox</h1>
 
 <p>0.3.7 BETA</p>
 
-<h2>What is it?</h2>
+<h2>
+<a name="what-is-it" class="anchor" href="#what-is-it"><span class="octicon octicon-link"></span></a>What is it?</h2>
 
 <p>Firefox style simplist dialog form.</p>
 
-<h2>How to use this?</h2>
+<h2>
+<a name="how-to-use-this" class="anchor" href="#how-to-use-this"><span class="octicon octicon-link"></span></a>How to use this?</h2>
 
 <p>It's quiet simple.</p>
 
-<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.lastest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.lastest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.msgbox.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
 
@@ -56,7 +59,8 @@
 <p>prompt("please text me.");
 -&gt; $.prompt("please text me.");</p>
 
-<h2>Wait! YOU MUST SEE BEFORE USE THIS PLUGIN,</h2>
+<h2>
+<a name="wait-you-must-see-before-use-this-plugin" class="anchor" href="#wait-you-must-see-before-use-this-plugin"><span class="octicon octicon-link"></span></a>Wait! YOU MUST SEE BEFORE USE THIS PLUGIN,</h2>
 
 <p>this plugin is can't replace as javascript standard function (alert, etc.)
 because, this plugin cannot wait user action while showing dialog.
@@ -65,7 +69,7 @@ when user clicked in a dialog button, such as OK or cancel, msgbox will call you
 
 <p>Please don't..</p>
 
-<div class="highlight"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+<div class="highlight highlight-js"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
     <span class="c1">//All MsgBox function returns MsgBox Container Object. so it'll return always true.</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">'Are you sure to save it?'</span><span class="p">)){</span>
         <span class="k">return</span> <span class="kc">true</span><span class="p">;</span><span class="c1">//Page will changed without your confirm.</span>
@@ -76,7 +80,7 @@ when user clicked in a dialog button, such as OK or cancel, msgbox will call you
 
 <p><strong>So, what can I do?</strong></p>
 
-<div class="highlight"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+<div class="highlight highlight-js"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">form</span><span class="p">.</span><span class="nx">confirm</span><span class="p">){</span><span class="c1">//Use variables or DOM objects or whatever you want.</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">'Are you sure to save it?'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">){</span>
             <span class="nx">form</span><span class="p">.</span><span class="nx">confirm</span><span class="o">=</span><span class="nx">answer</span><span class="p">;</span>
@@ -89,31 +93,34 @@ when user clicked in a dialog button, such as OK or cancel, msgbox will call you
 
 <ul>
 <li>You can use another solution to solve this.</li>
-</ul><h2>OK. so, How to use with callback function?</h2>
+</ul><h2>
+<a name="ok-so-how-to-use-with-callback-function" class="anchor" href="#ok-so-how-to-use-with-callback-function"><span class="octicon octicon-link"></span></a>OK. so, How to use with callback function?</h2>
 
 <p>jQuery.MsgBox can add your callback function for provide next action after user clicked.
 It's Very simple.</p>
 
-<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s2">"click me."</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s2">"click me."</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'you clicked'</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 
-<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s2">"press OK or Cancel."</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">bool</span><span class="p">){</span>
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s2">"press OK or Cancel."</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">bool</span><span class="p">){</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'you clicked'</span><span class="o">+</span><span class="p">(</span><span class="nx">bool</span><span class="o">?</span><span class="s1">'OK'</span><span class="o">:</span><span class="s1">'cancel'</span><span class="p">));</span>
 <span class="p">});</span>
 </pre></div>
 
-<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">prompt</span><span class="p">(</span><span class="s2">"what's your name?"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">){</span>
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">prompt</span><span class="p">(</span><span class="s2">"what's your name?"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">){</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'your name is '</span><span class="o">+</span><span class="nx">string</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 
-<h2>I want view live example.</h2>
+<h2>
+<a name="i-want-view-live-example" class="anchor" href="#i-want-view-live-example"><span class="octicon octicon-link"></span></a>I want view live example.</h2>
 
 <p>OK. <a href="http://jsfiddle.net/preFy/" title="live example">here's an example</a>. </p>
 
-<h2>What browser can run with this plugin?</h2>
+<h2>
+<a name="what-browser-can-run-with-this-plugin" class="anchor" href="#what-browser-can-run-with-this-plugin"><span class="octicon octicon-link"></span></a>What browser can run with this plugin?</h2>
 
 <p>first, jQuery 1.4 or later needed.
 and, You can run with most popular major browser,
@@ -121,17 +128,20 @@ Internet Explorer 8 or above, Firefox 3 or above, Safari 4 or above, Chrome 10 o
 NOTE : Old school browser, such as IE 7 or lower is have a problem with CSS issue.
 that's all. this plugin have NO images or other resources.</p>
 
-<h2>Wow! It's simple and cool! can I join with you for make better this plugin?</h2>
+<h2>
+<a name="wow-its-simple-and-cool-can-i-join-with-you-for-make-better-this-plugin" class="anchor" href="#wow-its-simple-and-cool-can-i-join-with-you-for-make-better-this-plugin"><span class="octicon octicon-link"></span></a>Wow! It's simple and cool! can I join with you for make better this plugin?</h2>
 
 <p>Sure. contributes are welcome! just fork this plugin and get involved to make a better place for you and for me.</p>
 
-<h2>Goals</h2>
+<h2>
+<a name="goals" class="anchor" href="#goals"><span class="octicon octicon-link"></span></a>Goals</h2>
 
 <ul>
 <li>More Simplify and Optimization.</li>
 <li>Less Size and Unresolved Issues.</li>
 <li><strong>All Methods will returns Deferred Object instead of DOM Container</strong></li>
-</ul><h2>License</h2>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>(The MIT License)</p>
 
